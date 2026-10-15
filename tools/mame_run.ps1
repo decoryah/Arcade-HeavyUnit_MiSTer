@@ -1,5 +1,5 @@
 # Run MAME headless on a Heavy Unit set with every writable directory redirected
-# into build\mame, so nothing lands in the MAME install itself.
+# into ..\work\mame, so nothing lands in the MAME install itself.
 #
 #   .\tools\mame_run.ps1                      # hvyunit, 5 s, snapshot at exit
 #   .\tools\mame_run.ps1 -Set hvyunitu -Seconds 20
@@ -15,7 +15,7 @@ param(
 )
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$b = Join-Path $root "build\mame"
+$b = Join-Path (Split-Path -Parent $root) "work\mame"
 foreach ($d in "run","cfg","nvram","snap","state","diff","inp","comment","home") {
     New-Item -ItemType Directory -Force -Path (Join-Path $b $d) | Out-Null
 }

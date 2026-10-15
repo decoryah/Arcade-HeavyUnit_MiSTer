@@ -4,15 +4,15 @@
 # The Verilator build tree lives in the WSL home (the /mnt/c 9p mount is several
 # times slower for the thousands of small C++ files Verilator emits).  Needs the
 # RTL tree from tools/bootstrap_rtl.sh and ROM regions from
-#   py -3 tools/hvyunit_roms.py split hvyunit build/hvyunit
+#   py -3 tools/hvyunit_roms.py split hvyunit ../work/hvyunit
 set -eu
 FRAMES="${1:-20}"; shift || true
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 TP="$REPO/rtl/third_party"
-ROMDIR="${ROMDIR:-$REPO/build/hvyunit}"
+ROMDIR="${ROMDIR:-$REPO/../work/hvyunit}"
 OBJ="${OBJ:-$HOME/hvyunit-sim/m1}"
-OUT="${OUT:-$REPO/build/m1}"
+OUT="${OUT:-$REPO/../work/m1}"
 
 export PATH="$HOME/tools/oss-cad-suite/bin:$PATH"
 mkdir -p "$OBJ" "$OUT" "$OUT/state"

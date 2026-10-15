@@ -36,7 +36,7 @@ def main():
     ap.add_argument("rgbdir")
     ap.add_argument("first", type=int)
     ap.add_argument("last", type=int)
-    ap.add_argument("--roms", default="build/hvyunit")
+    ap.add_argument("--roms", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "work", "hvyunit"))
     ap.add_argument("--png")
     a = ap.parse_args()
 

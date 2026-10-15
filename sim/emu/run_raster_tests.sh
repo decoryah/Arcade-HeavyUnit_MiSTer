@@ -5,8 +5,8 @@
 #   bash sim/emu/run_raster_tests.sh [outdir]       (rebuilds the bench once, then runs every case)
 set -u
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-OUT="${1:-$REPO/build/emu8}"
-IMG="$REPO/build/hvyunit.rom"
+OUT="${1:-$REPO/../work/emu8}"
+IMG="$REPO/../work/hvyunit.rom"
 RUN="$REPO/sim/emu/run_emu.sh"
 export OBJ="${OBJ:-$HOME/hvyunit-sim/emu8}"
 mkdir -p "$OUT"

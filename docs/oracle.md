@@ -16,19 +16,19 @@ MAME 0.289 --sim/oracle/hvyunit_capture.lua-->  frames/f<F>.raw   visible 256x22
 
 ```powershell
 .\tools\capture.ps1 -Frames 600                          # attract mode
-.\tools\capture.ps1 -Frames 1500 -Play -NoTaps -Out build\oracle\play   # coin, start, hold right + autofire
-.\tools\capture.ps1 -Frames 400 -Stim -StimFrom 100 -NoTaps -Out build\oracle\stim   # randomised stimulus
+.\tools\capture.ps1 -Frames 1500 -Play -NoTaps -Out ..\work\oracle\play   # coin, start, hold right + autofire
+.\tools\capture.ps1 -Frames 400 -Stim -StimFrom 100 -NoTaps -Out ..\work\oracle\stim   # randomised stimulus
 
-py -3 tools\hvyunit_roms.py split hvyunit build\hvyunit  # ROM regions the model reads
-py -3 tools\hv_oracle.py check build\oracle\play --step 5 --pair 1,0,2
-py -3 tools\hv_oracle.py png   build\oracle\play --frames 700:700 --out build\oracle\png
-py -3 tools\hv_coverage.py build\oracle\play
+py -3 tools\hvyunit_roms.py split hvyunit ..\work\hvyunit  # ROM regions the model reads
+py -3 tools\hv_oracle.py check ..\work\oracle\play --step 5 --pair 1,0,2
+py -3 tools\hv_oracle.py png   ..\work\oracle\play --frames 700:700 --out ..\work\oracle\png
+py -3 tools\hv_coverage.py ..\work\oracle\play
 ```
 
 `capture.ps1` runs MAME headless (`-video none -sound none -nothrottle`) with
-every writable directory redirected into `build\mame`. A 1500-frame gameplay
-capture takes about 25 s of wall clock and about 350 MB; everything under
-`build\` is git-ignored because it is derived from copyrighted ROMs.
+every writable directory redirected into `..\work\mame`. A 1500-frame gameplay
+capture takes about 25 s of wall clock and about 350 MB; the scratch folder
+`..\work\` is outside the repository because it is derived from copyrighted ROMs.
 
 ## The convention — read this before using the files
 

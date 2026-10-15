@@ -2,13 +2,13 @@
 # Video-only bench.   bash sim/video/run.sh CAPDIR FRAME [FRAME ...]
 #
 # Builds the bench once, then renders each requested frame from the MAME oracle
-# state dumps and writes build/video/f<F>.rgb; tools/video_cmp.py compares.
+# state dumps and writes ../work/video/f<F>.rgb; tools/video_cmp.py compares.
 set -eu
 CAP="$1"; shift
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-ROMDIR="${ROMDIR:-$REPO/build/hvyunit}"
+ROMDIR="${ROMDIR:-$REPO/../work/hvyunit}"
 OBJ="${OBJ:-$HOME/hvyunit-sim/video}"
-OUT="$REPO/build/video"
+OUT="$REPO/../work/video"
 export PATH="$HOME/tools/oss-cad-suite/bin:$PATH"
 mkdir -p "$OBJ" "$OUT"
 

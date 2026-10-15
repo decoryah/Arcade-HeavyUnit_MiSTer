@@ -322,7 +322,7 @@ def main(argv=None):
     p.add_argument("capdir"); p.add_argument("--frames")
     p.add_argument("--step", type=int, default=1, help="check every Nth frame (renders are slow in pure Python)")
     p.add_argument("--pair", help="test only one a,p,b pairing, e.g. 1,0,2 (the measured convention); 6x faster")
-    p.add_argument("--roms", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "build", "hvyunit"))
+    p.add_argument("--roms", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "work", "hvyunit"))
     p.add_argument("--save-bad", dest="save_bad")
     p.set_defaults(fn=cmd_check)
     args = ap.parse_args(argv)

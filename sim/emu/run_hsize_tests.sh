@@ -3,8 +3,8 @@
 # keep every row, and stay inside the line.   bash sim/emu/run_hsize_tests.sh [outdir]
 set -u
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-OUT="${1:-$REPO/build/emu4}"
-IMG="$REPO/build/hvyunit.rom"
+OUT="${1:-$REPO/../work/emu4}"
+IMG="$REPO/../work/hvyunit.rom"
 RUN="$REPO/sim/emu/run_emu.sh"
 export OBJ="${OBJ:-$HOME/hvyunit-sim/emu4}"
 mkdir -p "$OUT"

@@ -5,8 +5,8 @@
 #   bash sim/emu/run_scale_tests.sh [outdir]
 set -u
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-OUT="${1:-$REPO/build/emu2s}"
-IMG="$REPO/build/hvyunit.rom"
+OUT="${1:-$REPO/../work/emu2s}"
+IMG="$REPO/../work/hvyunit.rom"
 export OBJ="${OBJ:-$HOME/hvyunit-sim/emu2}"
 export REBUILD=0
 mkdir -p "$OUT"

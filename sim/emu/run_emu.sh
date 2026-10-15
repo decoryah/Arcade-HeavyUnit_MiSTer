@@ -1,9 +1,9 @@
 #!/bin/bash
 # End-to-end bench of the MiSTer top level (HeavyUnit.sv): hps_io and the PLL stubbed, everything else real.
 #
-#   sim/emu/run_emu.sh [image] [frames, default 120] [out dir, default build/emu]
+#   sim/emu/run_emu.sh [image] [frames, default 120] [out dir, default ../work/emu]
 #
-# image defaults to build/hvyunit.rom (py -3 tools/hvyunit_roms.py build hvyunit ...).  Environment:
+# image defaults to ../work/hvyunit.rom (py -3 tools/hvyunit_roms.py build hvyunit ...).  Environment:
 #   DUMP=a:b[:step]  frames to write as <out>/f<F>.rgb, in the MAME oracle's numbering (tools/video_cmp.py compares)
 #   PLAY=1           replay the oracle's coin / start / right / fire stimulus (COIN=420 START=480)
 #   FAST=1           model the MRA's address= attribute (build 2; build with HAS_FAST=1)
@@ -15,9 +15,9 @@
 # The Verilator build tree lives in the WSL home (the /mnt/c mount is far slower for the C++ Verilator emits).
 set -eu
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-IMG="${1:-$REPO/build/hvyunit.rom}"
+IMG="${1:-$REPO/../work/hvyunit.rom}"
 FR="${2:-120}"
-OUT="${3:-$REPO/build/emu}"
+OUT="${3:-$REPO/../work/emu}"
 OBJ="${OBJ:-$HOME/hvyunit-sim/emu}"
 TP="$REPO/rtl/third_party"
 S="$REPO/sys"

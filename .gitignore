@@ -1,13 +1,12 @@
-# third-party reference checkouts (see docs/ARCHITECTURE.md, "Reference material")
-/ref/
-
-# generated ROM images, simulation and oracle output -- derived from copyrighted
-# ROMs, never commit
-/build/
-/out/
+# ROMs and ROM images: never commit
+*.zip
 *.rom
 *.bin
-!releases/*.rbf
+*.nv
+*.nvm
+
+# the release zip is attached to the GitHub release, not committed (tools/package.py writes it to dist/)
+/dist/
 
 # Quartus
 /db/
@@ -19,6 +18,7 @@
 /.qsys_edit/
 *.qws
 *.rpt
+*.summary
 *.done
 *.pin
 *.sof
@@ -32,21 +32,21 @@
 *.sopcinfo
 PLLJ_PLLSPE_INFO.txt
 c5_pin_model_dump.txt
+# written at the start of every compile by sys/build_id.tcl
+build_id.v
 
-# Verilator / simulators
+# the tested release's fitter and timing summaries
+!releases/*.summary
+
+# simulation
 /obj_dir/
+sim/obj_*/
+sim/emu/obj_*/
 *.vcd
 *.fst
 *.vvp
+*.ppm
 
 # python
 __pycache__/
 *.pyc
-
-# earlier test builds: kept on disk, not part of the history (releases/build4 and the v1.0 zip are the release)
-/releases/build1/
-/releases/build2/
-/releases/build3/
-
-# written at the start of every compile by sys/build_id.tcl
-/build_id.v

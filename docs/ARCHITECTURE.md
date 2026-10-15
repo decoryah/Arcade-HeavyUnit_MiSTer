@@ -1,8 +1,8 @@
-# Heavy Unit (Kaneko/Taito, 1988) — MiSTer core: architecture
+# Heavy Unit (Kaneko/Taito, 1988) â€” MiSTer core: architecture
 
-Status: **built, verified against MAME, ready for hardware test** (2026-10-14). Sections 1–6
+Status: **built, verified against MAME, ready for hardware test** (2026-10-14). Sections 1â€“6
 are the hardware as read from MAME's driver (`ref/mame/hvyunit.cpp`, `kan_pand.cpp`);
-§7 is the layout of what was built, §8 the milestones (all met in simulation), §12 the
+Â§7 is the layout of what was built, Â§8 the milestones (all met in simulation), Â§12 the
 implementation notes (timing, fast load, CRT Adjust, Scale).
 
 ## 1. What the board is
@@ -237,7 +237,7 @@ Memory (Cyclone V 5CSEBA6): 443 / 553 M10K blocks (3.36 Mbit, 59 %), 14.6 k ALMs
    `C:\repos\taitol-mister\mister\tools\mame\mame.exe` (same version as the ROM
    set; all five sets known; `hvyunit` verifies good; boots to the title screen
    headless at ~2.4Ã— real time). `tools/mame_run.ps1` runs it with every
-   writable directory redirected into `build\mame`.
+   writable directory redirected into `..\work\mame`.
 
 ## 10. Toolchain (verified 2026-10-14)
 

@@ -3,7 +3,7 @@
 
     dis8051.py FILE [START [END]]       (hex or decimal addresses)
 
-Written to read the Heavy Unit "Mermaid" firmware (build/hvyunit/mermaid.bin).
+Written to read the Heavy Unit "Mermaid" firmware (work/hvyunit/mermaid.bin).
 SFR and bit names cover the standard 8051 only.
 """
 import sys

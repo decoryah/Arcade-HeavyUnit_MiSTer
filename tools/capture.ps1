@@ -1,9 +1,9 @@
 # Capture a MAME oracle (pixels + state + I/O taps) for a Heavy Unit set.
 #
 #   .\tools\capture.ps1 -Frames 120                      # attract mode
-#   .\tools\capture.ps1 -Frames 1800 -Play -Out build\oracle\play
+#   .\tools\capture.ps1 -Frames 1800 -Play -Out ..\work\oracle\play
 #
-# Output goes to build\oracle\<set> by default (git-ignored). Layout is
+# Output goes to ..\work\oracle\<set> by default (outside the repository). Layout is
 # documented in sim\oracle\hvyunit_capture.lua.
 param(
     [string]$Set    = "hvyunit",
@@ -19,7 +19,7 @@ param(
 )
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-if (-not $Out) { $Out = Join-Path $root ("build\oracle\" + $Set) }
+if (-not $Out) { $Out = Join-Path (Split-Path -Parent $root) ("work\oracle\" + $Set) }
 elseif (-not [System.IO.Path]::IsPathRooted($Out)) { $Out = Join-Path $root $Out }
 
 New-Item -ItemType Directory -Force -Path (Join-Path $Out "frames") | Out-Null

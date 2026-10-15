@@ -19,7 +19,7 @@ import hv_oracle as H
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("capdir")
-    ap.add_argument("--roms", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "build", "hvyunit"))
+    ap.add_argument("--roms", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "work", "hvyunit"))
     ap.add_argument("--step", type=int, default=1)
     a = ap.parse_args()
 

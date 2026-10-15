@@ -4,8 +4,8 @@
 # Each case writes <outdir>/<case>.log; a summary of PASS / FAIL lines is printed at the end.
 set -u
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-OUT="${1:-$REPO/build/emu2}"
-IMG="$REPO/build/hvyunit.rom"
+OUT="${1:-$REPO/../work/emu2}"
+IMG="$REPO/../work/hvyunit.rom"
 RUN="$REPO/sim/emu/run_emu.sh"
 export OBJ="${OBJ:-$HOME/hvyunit-sim/emu2}"
 mkdir -p "$OUT"
