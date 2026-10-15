@@ -1,0 +1,87 @@
+--- a/jt8051.v
++++ b/jt8051.v
+@@ -25,7 +25,8 @@
+     output     [ 7:0] x_dout,
+     output     [15:0] x_addr,
+     output            x_wr,
+-    output            x_acc
++    output            x_acc,
++    output     [ 3:0] port_we    // hvyunit-mister: P0..P3 write strobes
+ );
+ 
+ wire [ 7:0] ir, a, b, psw, sp, sfr_dout, sfr_addr, sfr_din;
+@@ -154,6 +155,7 @@
+ );
+ 
+ jt8051_periph u_periph(
++    .port_we         ( port_we         ),
+     .rst             ( rst             ),
+     .clk             ( clk             ),
+     .cen             ( cen             ),
+--- a/jt8051_periph.v
++++ b/jt8051_periph.v
+@@ -2,6 +2,7 @@
+  * SPDX-License-Identifier: GPL-3.0-or-later */
+ 
+ module jt8051_periph(
++    output reg [ 3:0] port_we,   // hvyunit-mister: one-clk strobe per SFR write to P0..P3
+     input             rst,
+     input             clk,
+     input             cen,
+@@ -231,6 +232,24 @@
+             default: ;
+         endcase
+     end
++end
++
++// hvyunit-mister: port write strobes.  MAME's i8051 calls its port-out
++// callback on EVERY write to P0..P3, even of an unchanged value, and the Heavy
++// Unit glue depends on that.  This pulse is coincident with the latch update
++// above, so p*_o already shows the new value when it is high.
++always @(posedge clk) begin
++    if (rst) port_we <= 4'd0;
++    else begin
++        port_we <= 4'd0;
++        if (cen && sfr_we) case (sfr_addr)
++            8'h80: port_we[0] <= 1'b1;
++            8'h90: port_we[1] <= 1'b1;
++            8'ha0: port_we[2] <= 1'b1;
++            8'hb0: port_we[3] <= 1'b1;
++            default: ;
++        endcase
++    end
+ end
+ 
+ jt8051_serial u_serial(
+--- a/jt8051_regs.v
++++ b/jt8051_regs.v
+@@ -183,14 +183,22 @@
+         a<=0; b<=0; psw<=0; sp<=8'h07; dptr<=0; pc<=0; ir<=0;
+         op1<=0; op2<=0; md<=0; ea<=0; lhs<=0; rhs<=0;
+     end else if (cen) begin
+-        if ((wr || dst_we) && sfr_sel) begin
++        // hvyunit-mister: a conditional bit write (JBC) whose condition is false
++        // must not write ANY register.  ram_we/sfr_we above already honour that;
++        // this block (SP, DPTR, PSW, ACC, B) did not, so a not-taken JBC ACC.n
++        // clobbered the accumulator.
++        if ((wr || dst_we) && sfr_sel && !(dst_sel==BITC_DST && !cond)) begin
++            // hvyunit-mister: write sfr_din, not src.  For a bit instruction
++            // (CLR/SETB/CPL/JBC on ACC.n, PSW.n, B.n ...) sfr_din is the byte with
++            // the bit changed (bit_dout); src is just the bit's new value, so
++            // `CLR ACC.7` used to turn the whole accumulator into 00h.
+             case (addr8)
+-                8'h81: sp          <= src;
+-                8'h82: dptr[7:0]   <= src;
+-                8'h83: dptr[15:8]  <= src;
+-                8'hd0: psw         <= {src[7:1],psw[0]};
+-                8'he0: begin a<=src; psw[0]<=^src; end
+-                8'hf0: b           <= src;
++                8'h81: sp          <= sfr_din;
++                8'h82: dptr[7:0]   <= sfr_din;
++                8'h83: dptr[15:8]  <= sfr_din;
++                8'hd0: psw         <= {sfr_din[7:1],psw[0]};
++                8'he0: begin a<=sfr_din; psw[0]<=^sfr_din; end
++                8'hf0: b           <= sfr_din;
+                 default: ;
+             endcase
+         end

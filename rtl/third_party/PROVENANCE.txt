@@ -1,0 +1,6 @@
+Third-party sources copied by tools/bootstrap_rtl.sh -- do not edit.
+jtcores  bfced64dad833daa3864e601e9c0e90614c56df8  (modules/jtframe/hdl/cpu/t80/T80s.v, modules/jt8051/hdl)
+jt12     efa4068a12c9771643fb98bcaaea58c860f5b000
+jt49     6f1247fe0282a70c86ea2b4d8aa901f5332c94db
+Licences: GPL-3.0 / GPL-3.0-or-later (see each repo's LICENSE).
+Local changes: rtl/patches/jt8051-hvyunit.patch -- (1) P0-P3 SFR write strobes, (2) a not-taken JBC no longer writes ACC/B/PSW/SP/DPTR, (3) bit instructions on ACC/B/PSW/SP/DPTR write the modified byte instead of the bit value.

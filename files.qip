@@ -1,0 +1,43 @@
+set_global_assignment -name SYSTEMVERILOG_FILE HeavyUnit.sv
+set_global_assignment -name SDC_FILE HeavyUnit.sdc
+
+# the machine
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/hvyunit/hvyunit_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/hvyunit/hvyunit_timing.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/hvyunit/hvyunit_mcu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/hvyunit/hvyunit_mermaid.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/hvyunit/hvyunit_pandora.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/hvyunit/hvyunit_video.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/hvyunit/hvyunit_core.sv
+
+# Z80: jtframe's Verilog netlist of the T80 core
+set_global_assignment -name VERILOG_FILE rtl/third_party/t80/T80s.v
+
+# 8751: jt8051 and its generated microcode (the .uc is read with $readmemb)
+set_global_assignment -name SEARCH_PATH rtl/third_party/jt8051
+set_global_assignment -name VERILOG_FILE rtl/third_party/jt8051/jt8051.v
+set_global_assignment -name VERILOG_FILE rtl/third_party/jt8051/jt8051_alu.v
+set_global_assignment -name VERILOG_FILE rtl/third_party/jt8051/jt8051_ctrl.v
+set_global_assignment -name VERILOG_FILE rtl/third_party/jt8051/jt8051_regs.v
+set_global_assignment -name VERILOG_FILE rtl/third_party/jt8051/jt8051_periph.v
+set_global_assignment -name VERILOG_FILE rtl/third_party/jt8051/jt8051_serial.v
+
+# YM2203: jt12 (jt03) and the jt49 PSG
+set_global_assignment -name SEARCH_PATH rtl/third_party/jt12
+set_global_assignment -name SEARCH_PATH rtl/third_party/jt12/adpcm
+set_global_assignment -name SEARCH_PATH rtl/third_party/jt12/dac
+set_global_assignment -name SEARCH_PATH rtl/third_party/jt12/mixer
+set_global_assignment -name SEARCH_PATH rtl/third_party/jt49
+set_global_assignment -name SEARCH_PATH rtl/third_party/jt49/filter
+set_global_assignment -name VERILOG_FILE rtl/third_party/jt12/jt03.v
+
+# MiSTer platform layer
+set_global_assignment -name SYSTEMVERILOG_FILE target/mister/hvyunit_mem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE target/mister/sdram_ctrl.sv
+set_global_assignment -name SYSTEMVERILOG_FILE target/mister/hvyunit_fastload.sv
+
+# CRT Adjust (rmonic79's MiSTer-CRT-Adjust, see modules/VENDOR.md)
+set_global_assignment -name SYSTEMVERILOG_FILE modules/crt-adjust/crt_adjust.sv
+
+# PLL
+set_global_assignment -name QIP_FILE rtl/pll.qip

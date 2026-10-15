@@ -1,0 +1,52 @@
+# third-party reference checkouts (see docs/ARCHITECTURE.md, "Reference material")
+/ref/
+
+# generated ROM images, simulation and oracle output -- derived from copyrighted
+# ROMs, never commit
+/build/
+/out/
+*.rom
+*.bin
+!releases/*.rbf
+
+# Quartus
+/db/
+/incremental_db/
+/output_files/
+/greybox_tmp/
+/hc_output/
+/qdb/
+/.qsys_edit/
+*.qws
+*.rpt
+*.done
+*.pin
+*.sof
+*.jdi
+*.ppf
+*.ddb
+*.cmp
+*.sip
+*.spd
+*.bsf
+*.sopcinfo
+PLLJ_PLLSPE_INFO.txt
+c5_pin_model_dump.txt
+
+# Verilator / simulators
+/obj_dir/
+*.vcd
+*.fst
+*.vvp
+
+# python
+__pycache__/
+*.pyc
+
+# earlier test builds: kept on disk, not part of the history (releases/build4 and the v1.0 zip are the release)
+/releases/build1/
+/releases/build2/
+/releases/build3/
+
+# written at the start of every compile by sys/build_id.tcl
+/build_id.v
